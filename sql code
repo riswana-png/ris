@@ -1,0 +1,280 @@
+
+
+
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Oct 20, 2024 at 03:39 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `supermarket_management_system`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `cid` int(11) NOT NULL,
+  `category_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`cid`, `category_name`) VALUES
+(3, ''),
+(6547592, 'BABY & KIDS'),
+(6547588, 'BAKERY &DAIRY'),
+(6547573, 'BAKERY SNACKS'),
+(6547590, 'BEVERAGES &DRINKS'),
+(57676, 'bhjbnknkb'),
+(6547574, 'BREAD&BUNS'),
+(6547576, 'BREAKFAST CEREALS'),
+(6547575, 'CAKES'),
+(6547568, 'choclate'),
+(6547582, 'EDIBLE OILS'),
+(6547579, 'EGGS'),
+(2, 'fgfdgd'),
+(6547581, 'FISH'),
+(6547572, 'fresh fruits'),
+(6547571, 'fresh vegetables'),
+(6547584, 'FRUITS&VEGETABLES'),
+(6547567, 'hfghgjg'),
+(6547594, 'HOME & KITCHEN'),
+(6547593, 'HOUSEHOLD'),
+(6547583, 'MASALAS &SPICES'),
+(6547585, 'MEAT &EGGS'),
+(6547587, 'OIL,SPICES &PICKLES'),
+(6547591, 'PERSONAL CARE'),
+(6547578, 'PICKLES'),
+(6547580, 'POULTRY'),
+(6547595, 'SCHOOL & STATIONARY'),
+(6547589, 'SNACKS &FOODS'),
+(6, 'soap'),
+(6547577, 'SPREADS,SAUCES,KETCHUP'),
+(6547570, 'stationary'),
+(6547586, 'SUGAR,SALT &GRAINS'),
+(1, 'tgdt'),
+(6547569, 'vegitables');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `items`
+--
+
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`id`, `name`, `category`, `price`, `quantity`, `image_path`) VALUES
+(12, 'kiwi green 3 pcs', 'FRUITS&VEGETABLES', 139.00, 0, 'uploads/Screenshot 2024-10-18 163912.png'),
+(13, 'njaalipovan payam', 'FRUITS&VEGETABLES', 26.00, 250, 'uploads/Screenshot 2024-10-18 164124.png'),
+(14, 'ethapayam', 'FRUITS&VEGETABLES', 40.00, 500, 'uploads/Screenshot 2024-10-18 164146.png'),
+(15, 'gooseberry(nellika)', 'FRUITS&VEGETABLES', 25.00, 250, 'uploads/Screenshot 2024-10-18 164159.png'),
+(16, 'citrus(mosambi)', 'FRUITS&VEGETABLES', 115.00, 500, 'uploads/Screenshot 2024-10-18 164216.png'),
+(17, 'capsicum', 'FRUITS&VEGETABLES', 45.00, 500, 'uploads/Screenshot 2024-10-18 164236.png'),
+(18, 'yam elephant', 'FRUITS&VEGETABLES', 36.00, 500, 'uploads/Screenshot 2024-10-18 164258.png'),
+(19, 'cauliflower', 'FRUITS&VEGETABLES', 48.00, 500, 'uploads/Screenshot 2024-10-18 164311.png'),
+(20, 'pomgranate', 'FRUITS&VEGETABLES', 98.00, 500, 'uploads/Screenshot 2024-10-18 164325.png'),
+(21, 'pineapple', 'FRUITS&VEGETABLES', 76.00, 1, 'uploads/Screenshot 2024-10-18 164336.png'),
+(22, 'apple', 'FRUITS&VEGETABLES', 120.00, 500, 'uploads/Screenshot 2024-10-18 164349.png'),
+(23, 'yellow cucumber', 'FRUITS&VEGETABLES', 33.00, 600, 'uploads/Screenshot 2024-10-18 164404.png'),
+(24, 'chicken', 'MEAT &EGGS', 220.00, 4, 'uploads/Screenshot 2024-10-18 170428.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
+--
+
+CREATE TABLE `login` (
+  `email` varchar(40) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `usertype` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`email`, `password`, `usertype`) VALUES
+('admin@gmail.com', 'admin123', 3),
+('sona@gmail.com', 'asdfg', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `item_ids` text NOT NULL,
+  `delivery_address` text NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `payment_method` enum('cod','online') NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `item_ids`, `delivery_address`, `total_amount`, `payment_method`, `created_at`) VALUES
+(1, 11, '1', 'adefsdg', 45.00, 'cod', '2024-10-17 09:00:21'),
+(3, 11, '9', 'asdfghjkghcgfgt', 100.00, 'online', '2024-10-17 09:05:19'),
+(4, 11, '1,3', 'ghgghhg', 90.00, 'online', '2024-10-17 09:26:11'),
+(5, 0, '12', 'kuzhikkatumalil house', 139.00, 'cod', '2024-10-18 15:54:38'),
+(6, 0, '24', 'dcfvbgkm', 220.00, 'cod', '2024-10-18 16:06:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phnum` int(20) NOT NULL,
+  `pass` varchar(50) NOT NULL,
+  `position` varchar(35) NOT NULL,
+  `userid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`name`, `email`, `phnum`, `pass`, `position`, `userid`) VALUES
+('rizwana', 'ris@gmail.com', 2147483647, '123', 'saler', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `name` varchar(35) NOT NULL,
+  `email` varchar(35) NOT NULL,
+  `phonenum` int(12) NOT NULL,
+  `password` varchar(35) NOT NULL,
+  `userid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`name`, `email`, `phonenum`, `password`, `userid`) VALUES
+('sona', 'sona@gmail.com', 2147483647, 'asdfg', 11);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`cid`),
+  ADD UNIQUE KEY `name` (`category_name`);
+
+--
+-- Indexes for table `items`
+--
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`userid`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6547597;
+
+--
+-- AUTO_INCREMENT for table `items`
+--
+ALTER TABLE `items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
